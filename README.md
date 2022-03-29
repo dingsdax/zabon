@@ -85,16 +85,7 @@ Who knows if that's how it was 🤷🏻‍♂️😂.
 
 ## The Algorithm
 
-a little bit too much but who care
-
 TODO:
-
-Japanese particles written in Hiragana, are suffixes or short words that follow a modified noun, verb, adjective, or sentence.
-Some particals can appear in two types. They give pretty reliable cues where a word ends, given that all not all text is written in Hiragana.
-
-A simple way to find word segementations in Japanese is to tokenise by grouping characters contiuously by script (Hiragana, Katakana, Kanji, Romaji)
-
-Processed semantic segments are wrapped with the configurable tag (default: `<span>`). Setting the CSS `display` property to `inline-block` prevents splitting these units at the end.
 
 ## Other solutions
 ### [Google Budou]((https://github.com/google/budou)
