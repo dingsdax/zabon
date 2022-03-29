@@ -1,4 +1,4 @@
-# zabon.ruby
+# zabon.ruby 🍊
 
 A Ruby gem / Rails helper for dealing with Japanese line-breaking logic. It is basically a port of [mikan.js](https://github.com/trkbt10/mikan.js), which implements a regular expression based algorithm to segment text into semantic chunks. No machine learning needed 🤖☺️. In addition the resulting text segments can be wrapped in a configurable HTML tag. All praise 👏👏👏 for the algorithm goes to [trkbt10](https://github.com/trkbt10).
 
