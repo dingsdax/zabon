@@ -7,10 +7,10 @@ class ZabonTest < Minitest::Test
   include ActionView::Helpers
 
   def setup
-    I18n.available_locales = [:en, :ja]
+    I18n.available_locales = %i[en ja]
     I18n.default_locale = :en
     I18n.backend = I18n::Backend::Simple.new
-    I18n.load_path = [File.join(locales_dir, '/en.yml'), File.join(locales_dir,  '/ja.yml')]
+    I18n.load_path = [File.join(locales_dir, "/en.yml"), File.join(locales_dir, "/ja.yml")]
 
     Zabon.configure do |config|
       config.tag_options = {}
@@ -23,13 +23,13 @@ class ZabonTest < Minitest::Test
   end
 
   def test_missing_translation_en
-    expected = %Q|<span class="translation_missing" title="translation missing: en.not_found">Not Found</span>|
+    expected = %(<span class="translation_missing" title="translation missing: en.not_found">Not Found</span>)
 
     assert_equal expected, zabon_translate(:not_found)
   end
 
   def test_missing_translation_ja
-    expected = %Q|<span class="translation_missing" title="translation missing: ja.not_found, locale: ja">Not Found</span>|
+    expected = %(<span class="translation_missing" title="translation missing: ja.not_found, locale: ja">Not Found</span>)
 
     assert_equal expected, zabon_translate(:not_found, locale: :ja)
   end
@@ -43,11 +43,11 @@ class ZabonTest < Minitest::Test
   def test_configuration
     Zabon.configure do |config|
       config.tag = :div # default: :span
-      config.tag_options = { class: 'zabon_trara', style: 'font_size: 5em' } # default:  { class: 'zabon', style: 'display: inline-block' }
+      config.tag_options = { class: "zabon_trara", style: "font_size: 5em" } # default:  { class: 'zabon', style: 'display: inline-block' }
       config.strip_tags = false # default true
     end
 
-    expected = %Q|<div class="zabon_trara" style="font_size: 5em">構成</div>|
+    expected = %(<div class="zabon_trara" style="font_size: 5em">構成</div>)
 
     assert_equal expected, zabon_translate(:configuration, locale: :ja)
 
@@ -55,7 +55,7 @@ class ZabonTest < Minitest::Test
   end
 
   def test_long_text
-    expected = <<~RESULT.gsub(/[\n\s]+/, '');
+    expected = <<~RESULT.gsub(/[\n\s]+/, "")
       <span>タスク</span>
       <span>管理は、</span>
       <span>何かをしようと</span>
@@ -96,13 +96,11 @@ class ZabonTest < Minitest::Test
     assert_equal expected, zabon_translate(:mt_intro_text, locale: :ja)
   end
 
-  def text_default_configuration
-
-  end
+  def text_default_configuration; end
 
   private
 
   def locales_dir
-    File.dirname(__FILE__) + '/test_data/locales'
+    "#{File.dirname(__FILE__)}/test_data/locales"
   end
 end

@@ -7,7 +7,7 @@ module Zabon
     def initialize
       # HTML tag & options used for wrapping segments
       @tag = :span
-      @tag_options = { class: 'zabon', style: 'display: inline-block' }
+      @tag_options = { class: "zabon", style: "display: inline-block" }
 
       # strip source string of HTML tags; e.g. if source string does already contain span tags
       @strip_tags = true

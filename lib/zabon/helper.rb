@@ -21,7 +21,7 @@ module Zabon
 
       orig_translation = public_send(orig_translate, key, **options)
 
-      return orig_translation if orig_translation.include?('translation_missing')
+      return orig_translation if orig_translation.include?("translation_missing")
 
       orig_translation = strip_tags(orig_translation) if Zabon.config.strip_tags
 
