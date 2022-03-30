@@ -25,8 +25,20 @@ end
 
 ### Rails
 
-```
-TODO:
+``` ruby
+# add the following in an intializer to overwrite `t` helper method from Rails to use Zabon's helper method, which applies Japanese line breaking logic and wraps the results in a HTML tag and joins them back together.
+require 'zabon'
+
+module ActionView
+  module Helpers
+    module TranslationHelper
+      def t(key, **options)
+        zabon_translate(key, **options)
+      end
+    end
+  end
+end
+
 ```
 
 ## Japanese grammar 🇯🇵
@@ -57,7 +69,7 @@ The Japanese writing system uses for different components:
 
 ### Line breaking
 
-Certain characters in Japanese should not come at the end of a line, certain characters should not come at the start of a line, and some characters should never be split up across two lines. These rules are called [Kinsoku Shori 禁則処理](https://en.wikipedia.org/wiki/Line_breaking_rules_in_East_Asian_languages#Line_breaking_rules_in_Japanese_text_(Kinsoku_Shori):
+Certain characters in Japanese should not come at the end of a line, certain characters should not come at the start of a line, and some characters should never be split up across two lines. These rules are called [Kinsoku Shori 禁則処理](https://en.wikipedia.org/wiki/Line_breaking_rules_in_East_Asian_languages#Line_breaking_rules_in_Japanese_text_(Kinsoku_Shori)):
 
 simplified:
 
@@ -85,7 +97,32 @@ Who knows if that's how it was 🤷🏻‍♂️😂.
 
 ## The Algorithm
 
-TODO:
+This algorithm does NOT find the most minimal segmentation of unbreakable text segments and probably will have problems if a text is solely written in one alphabet. It also does not support Furigana (yet). It does basic text segmentation and stitches the segments back together in segments which can be made unbreakable. The unbreakability we achieve by wrapping them in a <span> tag with certain CSS rules.
+
+### Splitting
+
+1. Split text across different alphabets used: split text into parts that are written in Kanjis, Hiragana, Katakana, Latin (incl. double width characters). The assumption here is that parts written in the same script should belong together.
+
+2. Then split up each element further by splitting up particles are sequences that might be used as particles. The original author of the algorithm has identified the following list (でなければ, について, かしら, くらい, けれど, なのか, ばかり, ながら, ことよ, こそ, こと, さえ, しか, した, たり, だけ, だに, だの, つつ, ても, てよ, でも, とも, から, など, なりので, のに, ほど, まで, もの, やら, より, って, で, と, な, に, ね, の, も, は, ば, へ, や, わ, を, か, が, さ, し, ぞ, て). To me that looks about right, but maybe there are missing some.
+
+3. Split along further by splitting up brackets and quotations: ([,〈,《,「,『,｢,【,〔,〚,〖,〘,❮,❬,❪,❨,(,<,{,❲,❰,｛,❴,] + the matching end brackets and quotations.
+
+### Stitching                                                                                                               
+                                                                                                               
+1. Now we have a list of minimal segments and try to stitch them back together in a result set, so that they will fulfil Japanese line breaking rules. We are gonna look at tuples from left to right, looking at the current segment and the previous segment.
+
+2. If the current segment is a beginning bracket or quotation; we look at the next segment, we have a definitiv start of an unbreakable segment.
+
+3. If the current segment is an ending bracket or quotation; we append to the last entry of the result set and don't look back anymore; we've reached the end of a segment and start a new one with the next iteration.
+
+4. If the previous segment is a beginning bracket; we stitch it together with the current segment to become a new segment. In the next iteration we don’t need to look at the previous segment anymore and continue.
+
+5. If he current segment is a particle or a punctuation mark and we are not looking back (see step 7.); we append the current segment to the last entry of the result set.
+
+6a. If he current segment is a particle or a punctuation mark or 
+6b. If the previous segment is not a bracket, quotation or punctuation mark or a conjunctive particle (と, の,に) and the current segment is in Hiragana; we append to the last entry of the result set.
+
+7. If no condition from stiching steps 1-2 are matching we can safely add the current segment to the result set.
 
 ## Other solutions
 ### [Google Budou](https://github.com/google/budou)
