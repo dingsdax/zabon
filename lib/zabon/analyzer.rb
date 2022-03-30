@@ -34,14 +34,14 @@ module Zabon
           end
 
           # if the previous segment is a beginning bracket =>
-          # we stitch together previous segment & current segment tp become a new segment
+          # we stitch together previous segment & current segment to become a new segment
           # we don't look back anymore
           if previous_segment&.bracket_begin?
             current_segment = Segment.new(previous_segment + current_segment)
             previous_segment = nil
           end
 
-          # if we don't look at the first segment, the current segment is a particle or a period and
+          # if we are not at the start, the current segment is a particle or a period and
           # we are not looking back, we append to the last entry of the result set
           if result.size > 1 && current_segment.joshi_or_period? && previous_segment.nil?
             result[-1] += current_segment

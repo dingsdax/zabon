@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = "Japanese line breaking algorithm: Ruby port of mikan.js"
   spec.description   = "Splits up a (Japanese) string into semantic segment; wrap result in a HTML tag"
   spec.license       = "MIT"
-  spec.required_ruby_version = ">= 2.7.0"
+  spec.required_ruby_version = ">= 2.5.7"
 
   spec.metadata["source_code_uri"] = "https://github.com/krokodaxl/zabon.git"
 
