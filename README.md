@@ -84,7 +84,7 @@ simplified:
 
 Written Japanese uses no spaces and little punctuation to delimit words. Readers instead depend on grammatical cues (e.g. Japanese, particles and verb endings), the relative frequency of character combinations, and semantic context, in order to determine what words have been written. This is a non trivial problem which is often solved by applying machine learning algorithms. Without a careful approach, breaks can occur randomly and usually in the middle of a word. This is an issue with typography on the web and results in a degradation of readability.
 
-### Zabon ??? - The name
+### Zabon ???
 
 I made a couple of assumptions when choosing the name:
 1. 🍊 The original algorithm name **Mikan** might be transscription of 蜜柑, a Japanese citrus fruit (Mandarin, Satsuma)
@@ -119,8 +119,7 @@ This algorithm does NOT find the most minimal segmentation of unbreakable text s
 
 5. If he current segment is a particle or a punctuation mark and we are not looking back (see step 7.); we append the current segment to the last entry of the result set.
 
-6a. If he current segment is a particle or a punctuation mark or 
-6b. If the previous segment is not a bracket, quotation or punctuation mark or a conjunctive particle (と, の,に) and the current segment is in Hiragana; we append to the last entry of the result set.
+6. If he current segment is a particle or a punctuation mark or if the previous segment is not a bracket, quotation or punctuation mark or a conjunctive particle (と, の,に) and the current segment is in Hiragana; we append to the last entry of the result set.
 
 7. If no condition from stiching steps 1-2 are matching we can safely add the current segment to the result set.
 
