@@ -88,7 +88,7 @@ Who knows if that's how it was 🤷🏻‍♂️😂.
 TODO:
 
 ## Other solutions
-### [Google Budou]((https://github.com/google/budou)
+### [Google Budou](https://github.com/google/budou)
 
 Budou is a python library, which uses word segmenters to analyze input sentences. It can  concatenate proper into meaningful chunks utilizing part-of-speech tagging and other syntactic information. Processed chunks are wrapped in a SPAN tag. Depending on the text segmentation algorithm used, it also has support for Chinese & Korean. Since this library is written in Python, it cannot be used simply used in Ruby, PHP, or Node.js.
 
