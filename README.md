@@ -49,10 +49,10 @@ Just enough Japanese to understand the algorithm :)
 
 The Japanese writing system uses for different components:
 
-* [Hiragana (ひらがな)](https://en.wikipedia.org/wiki/Hiragana), a syllabary alphabet used for Japanese words not covered by kanji and moestly for grammatical inflections
+* [Hiragana (ひらがな)](https://en.wikipedia.org/wiki/Hiragana), a syllabary alphabet used for Japanese words not covered by kanji and mostly for grammatical inflections
 * [Katakana (カタカナ)](https://en.wikipedia.org/wiki/Katakana), a syllabary alphabet used for transcription of foreign-language words into Japanese; for emphasis; [onomatopoeia](https://en.wikipedia.org/wiki/Onomatopoeia); for scientific terms and often Japanese companies.
 * [Kanji (漢字)](https://en.wikipedia.org/wiki/Kanji), a set of Chinese characters directly incorporated into the written Japanese language with often Japanese pronunciation, which can be
-* Romanji
+* [Romaji](https://en.wikipedia.org/wiki/Romanization_of_Japanese), use of Latin script in Japanese language
 
 ### Particles
 
