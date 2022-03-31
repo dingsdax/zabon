@@ -147,3 +147,4 @@ You can choose different segmenter backends depending on the needs of your envir
 * [Kuromoji - Japanese morphological analyzer written in Java](https://www.atilika.org/)
 * [WrapText CJK - line breaking rules in Lua](https://github.com/subsoap/wraptext)
 * [TinySegmenter - Ruby Port](https://github.com/6/tiny_segmenter)
+* [How to Pomelo](https://github.com/krokodaxl/zabon/wiki/How-to-Pomelo!)
