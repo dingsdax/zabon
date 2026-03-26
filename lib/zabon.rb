@@ -21,5 +21,9 @@ module Zabon
     def configure
       yield config
     end
+
+    def reset_config!
+      @config = Configuration.new
+    end
   end
 end

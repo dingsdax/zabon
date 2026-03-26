@@ -52,7 +52,7 @@ module Zabon
           # if we are not at the start, the current segment is a particle or a period or
           # the previous segment is not a bracket or period or a conjunctive particle and the current segment is hiragana
           # we append to the last entry of the result set
-          if result.length > 2 && current_segment.joshi_or_period? || (previous_segment&.keyword? && current_segment.hiragana? && !/^[とのに]$/.match?(previous_segment))
+          if (result.size > 2 && current_segment.joshi_or_period?) || (previous_segment&.keyword? && current_segment.hiragana? && !/^[とのに]$/.match?(previous_segment))
             result[-1] += current_segment
             # if the current segment is not a particle, we are no looking back anymore, we start a new segment
             previous_segment = current_segment.joshi? ? current_segment : nil

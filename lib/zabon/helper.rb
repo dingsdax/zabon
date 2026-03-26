@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "uri"
 require "action_view"
 
 module Zabon
@@ -12,16 +13,17 @@ module Zabon
     # and join again
     def zabon_translate(key, **options)
       orig_translate = options[:orig_translate] || :translate
+      translate_options = options.except(:orig_translate)
 
-      locale = (options[:locale] || I18n&.locale || :en).to_sym
+      locale = (options[:locale] || I18n.locale || :en).to_sym
 
-      return public_send(orig_translate, key, **options) if locale != :ja # if locale is not Japanese we use original method
+      return public_send(orig_translate, key, **translate_options) if locale != :ja # if locale is not Japanese we use original method
 
       return key.map { |k| zabon_translate(k, **options) } if key.is_a?(Array)
 
-      orig_translation = public_send(orig_translate, key, **options)
+      return public_send(orig_translate, key, **translate_options) unless I18n.exists?(key, locale: :ja)
 
-      return orig_translation if orig_translation.include?("translation_missing")
+      orig_translation = public_send(orig_translate, key, **translate_options)
 
       orig_translation = strip_tags(orig_translation) if Zabon.config.strip_tags
 

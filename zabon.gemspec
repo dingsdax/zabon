@@ -5,15 +5,15 @@ require_relative "lib/zabon/version"
 Gem::Specification.new do |spec|
   spec.name          = "zabon"
   spec.version       = Zabon::VERSION
-  spec.authors       = ["Joesi"]
-  spec.email         = ["johannes@meisterlabs.com"]
+  spec.authors       = ["Johannes D."]
+  spec.email         = ["dingsdax@fastmail.fm"]
 
   spec.summary       = "Japanese line breaking algorithm: Ruby port of mikan.js"
   spec.description   = "Splits up a (Japanese) string into semantic segment; wrap result in a HTML tag"
   spec.license       = "MIT"
-  spec.required_ruby_version = ">= 2.5.7"
+  spec.required_ruby_version = ">= 3.1"
 
-  spec.metadata["source_code_uri"] = "https://github.com/krokodaxl/zabon.git"
+  spec.metadata["source_code_uri"] = "https://github.com/dingsdax/zabon.git"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.

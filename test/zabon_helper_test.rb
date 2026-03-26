@@ -93,7 +93,7 @@ class ZabonTest < Minitest::Test
       <span>整理しましょう！</span>
     RESULT
 
-    assert_equal expected, zabon_translate(:mt_intro_text, locale: :ja)
+    assert_equal expected, zabon_translate(:sample_text, locale: :ja)
   end
 
   def text_default_configuration; end
