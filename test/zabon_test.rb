@@ -79,6 +79,15 @@ class ZabonTest < Minitest::Test
     assert_equal source, expected.join
   end
 
+  def test_particle_node
+    # Since the weather is nice, let's go outside.
+    source = "天気がいいので外に出かけましょう。"
+    expected = %w[天気がいいので 外に 出かけましょう。]
+
+    assert_equal expected, Zabon.split(source)
+    assert_equal source, expected.join
+  end
+
   def test_newline
     assert_equal ["\n"], Zabon.split("\n")
   end
@@ -87,42 +96,19 @@ class ZabonTest < Minitest::Test
     assert_equal [" "], Zabon.split(" ")
   end
 
-  # Meistertask translations
-
-  def test_meistertask1
-    # Task management is the link between planning to do something and getting it done. Your task management software should provide an overview of work in progress that enables tracking from conception to completion. Enter MeisterTask: join teams everywhere who use our Kanban-style project boards to digitalize workflows and gain a clear overview of task progress. Let's get organized together!
-    source = "タスク管理は、何かをしようと計画することと、それを実行することを結びつけるものです。タスク管理ソフトウェアは、構想から完成までを追跡できるように、進行中の作業の概要を提供しなければなりません。MeisterTaskを利用すれば、タスクの進捗状況を明確に把握するために、ワークフローをデジタル化し、カンバン方式のプロジェクトボードを使用しているチームに参加することができます。一緒に準備して整理しましょう！"
-    expected = ["タスク", "管理は、", "何かをしようと", "計画することと、", "それを", "実行することを", "結びつけるものです。", "タスク", "管理", "ソフトウェアは、", "構想から", "完成までを", "追跡できるように、", "進行中の", "作業の", "概要を", "提供しなければなりません。",
-                "MeisterTaskを", "利用すれば、", "タスクの", "進捗状況を", "明確に", "把握するために、", "ワークフローを", "デジタル", "化し、", "カンバン", "方式の", "プロジェクトボードを", "使用している", "チームに", "参加することができます。", "一緒に", "準備して", "整理しましょう！"]
+  def test_wrestling_long_sentence
+    # A wrestler's journey — long mixed-script sentence with Katakana loanwords and Kanji.
+    source = "プロレスラーはリングに上がる前に、長い年月のトレーニングと厳しい練習を積んでいます。ファンの声援がエネルギーとなり、試合で最高のパフォーマンスを発揮します。"
+    expected = ["プロレスラーは", "リングに", "上がる", "前に、", "長い", "年月の", "トレーニングと", "厳しい", "練習を", "積んでいます。", "ファンの", "声援が", "エネルギーとなり、", "試合で", "最高の", "パフォーマンスを", "発揮します。"]
 
     assert_equal expected, Zabon.split(source)
     assert_equal source, expected.join
   end
 
-  def test_meistertask2
-    # Task management is the structured, digitalized processing of tasks using a dedicated software. MeisterTask is an excellent example, but many others do exist.
-    source = "タスク管理とは、専用のソフトウェアを使ってタスクを構造的にデジタル処理することです。MeisterTaskが代表的な例ですが、他にも様々なソフトがあります。"
-    expected = ["タスク", "管理とは、", "専用の", "ソフトウェアを", "使って", "タスクを", "構造的に", "デジタル", "処理することです。", "MeisterTaskが", "代表的な", "例ですが、", "他にも", "様々な", "ソフトがあります。"]
-
-    assert_equal expected, Zabon.split(source)
-    assert_equal source, expected.join
-  end
-
-  def test_meistertask3
-    # MeisterTask's Gantt-style Timeline feature helps project managers drive efficiency and keep their teams aligned. Assign and schedule tasks in calendar view to locate bottlenecks easily and ensure deadlines are kept.
-    source = "MeisterTaskのガントスタイルのタイムライン機能は、プロジェクトマネージャーが効率を高め、チームの連携を維持するのに役立ちます。カレンダービューでタスクを割り当ててスケジュールし、ボトルネックを簡単に見つけて期限を守るようにします。"
-    expected = ["MeisterTaskの", "ガントスタイルの", "タイムライン", "機能は、", "プロジェクトマネージャーが", "効率を", "高め、", "チームの", "連携を", "維持するのに", "役立ちます。", "カレンダービューで", "タスクを", "割り", "当てて", "スケジュールし、",
-                "ボトルネックを", "簡単に", "見つけて", "期限を", "守るようにします。"]
-
-    assert_equal expected, Zabon.split(source)
-    assert_equal source, expected.join
-  end
-
-  def test_meistertask4
-    # MeisterTask's Gantt-style Timeline feature helps project managers drive efficiency and keep their teams aligned. Assign and schedule tasks in calendar view to locate bottlenecks easily and ensure deadlines are kept.
-    source = "MeisterTaskのガントスタイルのタイムライン機能は、プロジェクトマネージャーが効率を高め、チームの連携を維持するのに役立ちます。カレンダービューでタスクを割り当ててスケジュールし、ボトルネックを簡単に見つけて期限を守るようにします。"
-    expected = ["MeisterTaskの", "ガントスタイルの", "タイムライン", "機能は、", "プロジェクトマネージャーが", "効率を", "高め、", "チームの", "連携を", "維持するのに", "役立ちます。", "カレンダービューで", "タスクを", "割り", "当てて", "スケジュールし、",
-                "ボトルネックを", "簡単に", "見つけて", "期限を", "守るようにします。"]
+  def test_wrestling_katakana_moves
+    # Move names as Katakana loanwords followed by Japanese particles.
+    source = "プロレスの技には、ジャーマンスープレックスやタイガースープレックスなど、様々な投げ技があります。美しいフォームと力強さが観客を魅了します。"
+    expected = ["プロレスの", "技には、", "ジャーマンスープレックスや", "タイガースープレックスなど、", "様々な", "投げ", "技があります。", "美しい", "フォームと", "力強さが", "観客を", "魅了します。"]
 
     assert_equal expected, Zabon.split(source)
     assert_equal source, expected.join
