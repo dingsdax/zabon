@@ -5,7 +5,6 @@ require "action_view"
 
 module Zabon
   module Helper
-    include ActionView::Helpers::SanitizeHelper
     include ActionView::Helpers::TagHelper
 
     # can be used as a replacement for ActionView::Helpers::TranslationHelper.translate
@@ -26,7 +25,7 @@ module Zabon
 
       orig_translation = public_send(orig_translate, key, **translate_options)
 
-      orig_translation = strip_tags(orig_translation) if Zabon.config.strip_tags
+      orig_translation = ActionView::Base.full_sanitizer.sanitize(orig_translation, tags: []) if Zabon.config.strip_tags
 
       Sentry.set_context("zabon", { key: key, locale: locale }) if defined?(Sentry)
 

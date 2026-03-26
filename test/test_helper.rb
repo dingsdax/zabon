@@ -11,9 +11,3 @@ require "minitest/autorun"
 require "minitest/pride"
 
 require "zabon"
-
-module Zabon
-  def self.reset_config!
-    @config = Configuration.new
-  end
-end
