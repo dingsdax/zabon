@@ -1,0 +1,3 @@
+ja:
+  greeting: "zabon デモへようこそ。"
+  about: "zabonは、日本語の禁則処理を行うRubyのgemです。テキストを意味のある単位に分割し、display:inline-blockのCSSを適用することで、日本語タイポグラフィにおける不自然な改行を防ぎます。"

@@ -1,0 +1,3 @@
+en:
+  greeting: "Welcome to the zabon demo."
+  about: "zabon is a Ruby gem for Japanese line-breaking (Kinsoku Shori). It splits text into semantic segments so CSS can apply display: inline-block, preventing awkward mid-word breaks in Japanese typography."
