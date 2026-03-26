@@ -4,6 +4,8 @@ source "https://rubygems.org"
 
 gemspec
 
+gem "nokogiri", ">= 1.19.1"
+
 group :code_quality do
   gem "bundler-audit"
   gem "rubocop"
