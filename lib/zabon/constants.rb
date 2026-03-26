@@ -5,8 +5,8 @@ module Zabon
   # Some particals can appear in two types. They give pretty reliable cues depending on the following character, whether a line break is allowed or not.
   JOSHI = /
     (でなければ|について|かしら|くらい|けれど|なのか|ばかり|ながら|ことよ|こそ|こと|さえ|しか|した|たり|だけ|だに|だの|つつ|ても|てよ|でも|
-    とも|から|など|なりので|のに|ほど|まで|もの|やら|より|って|で|と|な|に|ね|の|も|は|ば|へ|や|わ|を|か|が|さ|し|ぞ|て)
-  /x.freeze
+    とも|から|など|なりので|ので|のに|ほど|まで|もの|やら|より|って|で|と|な|に|ね|の|も|は|ば|へ|や|わ|を|か|が|さ|し|ぞ|て)
+  /x
 
   # A simple way to find word segementations in Japanese is
   # to tokenise by grouping characters continuously by script (Hiragana, Katakana, Kanji, Romaji)
@@ -27,13 +27,13 @@ module Zabon
     [ァ-ヴー]+|
     [a-zA-Z0-9]+|
     [ａ-ｚＡ-Ｚ０-９]+)
-  /x.freeze
+  /x
 
   # Brackets & Quotations
-  BRACKETS_BEGIN = /([〈《「『｢（(\[【〔〚〖〘❮❬❪❨(<{❲❰｛❴])/.freeze
-  BRACKETS_END   = /([〉》」』｣)）\]】〕〗〙〛}>\)❩❫❭❯❱❳❵｝])/.freeze
+  BRACKETS_BEGIN = /([〈《「『｢（(\[【〔〚〖〘❮❬❪❨(<{❲❰｛❴])/
+  BRACKETS_END   = /([〉》」』｣)）\]】〕〗〙〛}>\)❩❫❭❯❱❳❵｝])/
 
-  PERIODS = /([\.\,。、！\!？\?]+)$/.freeze
+  PERIODS = /([\.\,。、！\!？\?]+)$/
 
-  HIRAGANA = /[ぁ-んゝ]+/.freeze
+  HIRAGANA = /[ぁ-んゝ]+/
 end
