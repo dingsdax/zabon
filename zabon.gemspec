@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name          = "zabon"
   spec.version       = Zabon::VERSION
   spec.authors       = ["Johannes D."]
-  spec.email         = ["dingsdax@proton.me"]
+  spec.email         = ["dingsdax@fastmail.fm"]
 
   spec.summary       = "Japanese line breaking algorithm: Ruby port of mikan.js"
   spec.description   = "Splits up a (Japanese) string into semantic segment; wrap result in a HTML tag"
