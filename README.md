@@ -25,20 +25,31 @@ end
 
 ### Rails
 
-``` ruby
-# add the following in an intializer to overwrite `t` helper method from Rails to use Zabon's helper method, which applies Japanese line breaking logic and wraps the results in a HTML tag and joins them back together.
-require 'zabon'
+The gem ships a Railtie that automatically includes `Zabon::Helper` into `ActionView::Base`, so `zabon_translate` is available in all views without any further setup.
 
+Call `zabon_translate` directly in views for strings that need segmentation:
+
+```erb
+<%= zabon_translate("page.title") %>
+```
+
+To replace the standard `t()` globally, add the following to an initializer. Note that this affects **all** ActionView translation calls — prefer explicit `zabon_translate` for finer control.
+
+```ruby
+# config/initializers/zabon.rb
 module ActionView
   module Helpers
     module TranslationHelper
-      def t(key, **options)
-        zabon_translate(key, **options)
+      alias_method :translate_without_zabon, :translate
+
+      def translate(key, **options)
+        zabon_translate(key, orig_translate: :translate_without_zabon, **options)
       end
+
+      alias t translate
     end
   end
 end
-
 ```
 
 ## Japanese grammar 🇯🇵
@@ -136,6 +147,23 @@ You can choose different segmenter backends depending on the needs of your envir
 * [TinySegmenter](http://chasen.org/~taku/software/TinySegmenter/): extremely compact word separation algorithm in Javascript which produces MeCab compatible word separation without depending on external APIs, no dictionaires, classifies input
 
 [TinySegmenter](http://chasen.org/~taku/software/TinySegmenter/) is an extremely compact word separation algorithm in Javascript which produces MeCab compatible word separation without depending on external APIs. It classifies the input by using entities like characters, N-Grams, Hiragana, Katakana (Japanese phonetic lettering system / syllabaries) and their combinations as features to determine whether a character is preceded by a word boundary. A [Naive Bayes]((https://towardsdatascience.com/naive-bayes-explained-9d2b96f4a9c0) model was trained using the [RWCP corpus](http://research.nii.ac.jp/src/en/list.html) and to make that model even more compact Boosting was used for [L1 norm regularization](https://blog.mlreview.com/l1-norm-regularization-and-sparsity-explained-for-dummies-5b0e4be3938a). Basically it compresess the model and get rid off redundant features as much as possible.
+
+### CSS `line-break: strict`
+
+Worth knowing: CSS has had native support for some Kinsoku Shori rules for a while now.
+
+```css
+p {
+  line-break: strict;
+  overflow-wrap: break-word;
+}
+```
+
+`line-break: strict` applies character-level Unicode line-breaking rules, which covers small kana, prolonged sound marks, and common punctuation cases. Browser implementations are not perfectly consistent and the spec intentionally leaves the precise rule set up to the user agent, so you may see subtle differences across browsers.
+
+zabon takes a fundamentally different approach. Instead of telling the browser where not to break, it wraps each segment in a `display: inline-block` element that the browser cannot split internally. This gives you precise semantic grouping that works the same way in every browser, and also opens up per-segment styling like hover effects, search highlighting, or animations. The trade-off is server-side processing and extra markup.
+
+If basic punctuation and small-kana rules are all you need, `line-break: strict` might be enough and has zero runtime cost. If you need guaranteed atomic grouping or per-segment control, zabon is the better fit.
 
 ## Resources
 
