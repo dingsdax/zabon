@@ -37,8 +37,7 @@ One logical change per commit. Include `Co-Authored-By:` when AI-generated.
 ## CI matrix
 
 Ruby 3.1, 3.2, 3.3, 3.4 on ubuntu-latest. Always verify fixes on **all** matrix versions locally
-before pushing — incompatibilities between Ruby versions are not always obvious:
-
+before pushing — incompatibilities between Ruby versions are not always obvious.
 
 ## Tests
 
