@@ -161,9 +161,9 @@ p {
 
 `line-break: strict` applies character-level Unicode line-breaking rules, which covers small kana, prolonged sound marks, and common punctuation cases. Browser implementations are not perfectly consistent and the spec intentionally leaves the precise rule set up to the user agent, so you may see subtle differences across browsers.
 
-zabon takes a fundamentally different approach. Instead of telling the browser where not to break, it wraps each segment in a `display: inline-block` element that the browser cannot split internally. This gives you precise semantic grouping that works the same way in every browser, and also opens up per-segment styling like hover effects, search highlighting, or animations. The trade-off is server-side processing and extra markup.
+Zabon takes a different approach. Instead of telling the browser where not to break, it wraps each segment in a `display: inline-block` element that the browser cannot split internally. This gives you semantic grouping that works the same way in every browser, and also opens up per-segment styling like hover effects, search highlighting, or animations. The trade-off is server-side processing and extra markup.
 
-If basic punctuation and small-kana rules are all you need, `line-break: strict` might be enough and has zero runtime cost. If you need guaranteed atomic grouping or per-segment control, zabon is the better fit.
+If basic punctuation and small-kana rules are all you need, `line-break: strict` is enough and has zero runtime cost.
 
 ## Resources
 
